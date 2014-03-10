@@ -54,7 +54,7 @@ public class NombreBinaire {
     public int obtenirValeurDecimale() {
         int valeur = 0;
         
-        for (int i = 0; i <= bits.length; ++i) {
+        for (int i = 0; i < bits.length; ++i) {
             valeur += bits[i] * 2^i;
         }
         

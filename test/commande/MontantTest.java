@@ -9,14 +9,6 @@ import static org.junit.Assert.*;
 public class MontantTest {
     
     Montant montant;
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testEstNegatifMontantNegatif() {

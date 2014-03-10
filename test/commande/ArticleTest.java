@@ -1,32 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package commande;
 
-import org.junit.After;
-import org.junit.Before;
+import commande.exceptions.PrixNegatifException;
+import commande.exceptions.PrixNulException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author ch891311
- */
 public class ArticleTest {
     
     Article article;
     
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     @Test
     public void testObtenirNom() {
         article = new Article("Banane", "Fruit jaune", new Montant(1.50));
@@ -61,6 +43,20 @@ public class ArticleTest {
         assertFalse(article.obtenirPrix().valeurMontant() == 1.50);
         assertEquals(0.75, article.obtenirPrix().valeurMontant(), 0);
     }
+    
+    @Test(expected = PrixNegatifException.class)
+    public void testModifierPrixNegatif() {
+        article = new Article("Smarties", "Bonbons au chocolat", new Montant(2.50));
+        article.modifierPrix(new Montant(-5));
+
+    }
+    
+    @Test(expected = PrixNulException.class)
+    public void testModifierPrixNul() {
+        article = new Article("Smarties", "Bonbons au chocolat", new Montant(2.50));
+        article.modifierPrix(new Montant(0));
+
+    }
 
     @Test
     public void testCompareTo() {
@@ -68,6 +64,15 @@ public class ArticleTest {
         Article  article2 = new Article("Banane", "barre de chocolat", new Montant(1.50));
         
         assertTrue(article.compareTo(article2) > 0);
+    }
+    
+    @Test
+    public void testCompareToEgaux() {
+        article = new Article("Bière", "Boisson alcoolisée", new Montant(5.50));
+        Article  article2 = new Article("Bière", "Cette description est différente, mais ce n'est pas grave.",
+                new Montant(1.50));
+        
+        assertTrue(article.compareTo(article2) == 0);
     }
     
 }

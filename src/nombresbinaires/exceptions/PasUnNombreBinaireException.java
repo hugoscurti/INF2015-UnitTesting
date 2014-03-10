@@ -1,8 +1,8 @@
 package nombresbinaires.exceptions;
 
-public class PasUnNombreBinaireException extends Exception {
+public class PasUnNombreBinaireException extends RuntimeException {
     
     public PasUnNombreBinaireException(String chaine) {
-        super("La chaîne" + chaine + " n'est pas un nombre binaire.");
+        super("La chaîne " + chaine + " n'est pas un nombre binaire.");
     }
 }
